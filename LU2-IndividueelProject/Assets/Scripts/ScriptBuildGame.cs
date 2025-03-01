@@ -9,4 +9,9 @@ public class ScriptBuildGame : MonoBehaviour
         uiBuilderBar.SetActive(!uiBuilderBar.activeSelf);
     }
 
+    public void ConfirmImageClick()
+    {
+        Debug.Log("Clicked image");
+    }
+
 }
