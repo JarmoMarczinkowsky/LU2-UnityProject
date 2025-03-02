@@ -10,6 +10,7 @@ public class ScriptBuildGame : MonoBehaviour
 
     [Header("Hideable menu items")]
     public GameObject menuSaloon;
+    public GameObject pauseMenu;    
 
     private GameObject newSaloon;
 
@@ -37,6 +38,11 @@ public class ScriptBuildGame : MonoBehaviour
 
     public void Update()
     {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             isDragging = !isDragging;
