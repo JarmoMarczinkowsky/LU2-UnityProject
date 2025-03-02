@@ -8,6 +8,9 @@ public class ScriptBuildGame : MonoBehaviour
     public GameObject prefabSaloon;
     public Canvas theCanvas;
 
+    [Header("Hideable menu items")]
+    public GameObject menuSaloon;
+
     private GameObject newSaloon;
 
     private bool isDragging = false;
@@ -57,6 +60,16 @@ public class ScriptBuildGame : MonoBehaviour
         {
             moveItem = null;
         }
+    }
+
+    public void ChangeSaloonColor()
+    {
+        menuSaloon.GetComponent<SpriteRenderer>().color = Color.gray;
+    }
+
+    public void ResetSaloonColor()
+    {
+        menuSaloon.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     private Vector3 GetMousePosition()
