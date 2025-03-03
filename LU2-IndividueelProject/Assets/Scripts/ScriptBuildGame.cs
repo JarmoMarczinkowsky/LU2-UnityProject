@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,6 +8,8 @@ public class ScriptBuildGame : MonoBehaviour
     public GameObject uiBuilderBar;
     public GameObject prefabSaloon;
     public Canvas theCanvas;
+
+    public TMP_Text txtStatus;
 
     [Header("Hideable menu items")]
     public GameObject menuSaloon;
@@ -24,15 +27,18 @@ public class ScriptBuildGame : MonoBehaviour
 
     public void ClickTest(string name)
     {
-        Debug.Log($"Clicked {name}");
-        
+        if (isDragging) return;
 
+        Debug.Log($"Clicked {name}");
+ 
         if(name == "Saloon")
         {
             newSaloon = Instantiate(prefabSaloon);
             newSaloon.transform.SetParent(theCanvas.transform);
             newSaloon.transform.localScale = new Vector3(20, 20, 0);
             moveItem = newSaloon.transform;
+
+            isDragging = true;
         }
     }
 
@@ -45,27 +51,32 @@ public class ScriptBuildGame : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            isDragging = !isDragging;
+            Debug.Log("Mouse clicked");
 
+            //if (moveItem == null) return;
+            //isDragging = !isDragging;
             if(isDragging)
             {
-                Debug.Log("Is dragging");
+                Debug.Log("Stopped dragging");
+                isDragging = false;
+                moveItem = null;
             }
-            else
-            {
-                Debug.Log("Is not dragging");
-            }
+
+
+            txtStatus.text = isDragging ? "Is dragging" : "Is not dragging";
         }
 
-        if (isDragging)
+        if (isDragging && moveItem != null)
         {
-            if(moveItem != null) moveItem.position = GetMousePosition();
-
+            //Debug.Log($"MoveItem niet null");
+            moveItem.position = GetMousePosition();
+            Debug.Log("Dragging item");
         }
-        else if (!isDragging)
-        {
-            moveItem = null;
-        }
+        //else if (!isDragging)
+        //{
+        //    //Debug.Log($"MoveItem is null");
+        //    moveItem = null;
+        //}
     }
 
     public void ChangeSaloonColor()
