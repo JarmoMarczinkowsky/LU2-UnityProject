@@ -23,7 +23,7 @@ public class ScriptLoginManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.KeypadEnter))
+        if (Input.GetKeyUp(KeyCode.Return))
         {
             Login();
         }
