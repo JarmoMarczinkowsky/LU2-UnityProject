@@ -1,8 +1,11 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScriptLoginManager : MonoBehaviour
 {
@@ -10,6 +13,13 @@ public class ScriptLoginManager : MonoBehaviour
     public TMP_InputField FieldUsername;
     public TMP_InputField FieldPassword;
     public TMP_Text txbErrorMessage;
+    //public TMP_Text txbMenuLoadWorld;
+    //public TMP_Text txbMenuNewWorld;
+    //public TMP_Text txbMenuLeaveGame;
+    public List<TMP_Text> lstMenuText;
+
+    public GameObject pnlLogin;
+    public GameObject pnlStartGame;
 
     [Header("Dependencies")]
     public UserApiClient userApiClient;
@@ -64,7 +74,9 @@ public class ScriptLoginManager : MonoBehaviour
             case WebRequestData<string> dataResponse:
                 Debug.Log("Login succes!");
                 // TODO: Todo handle succes scenario.
-                SceneManager.LoadScene("SceneMenuWorld");
+                //SceneManager.LoadScene("SceneMenuWorld");
+                pnlLogin.SetActive(false);
+                pnlStartGame.SetActive(true);
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
@@ -135,6 +147,31 @@ public class ScriptLoginManager : MonoBehaviour
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
     }
+
+    public void MenuTextPointerEnter(int index)
+    {
+        Debug.Log($"Cursor entered menu item: {index}");
+        HoverText(lstMenuText[index]);
+    }
+
+    public void MenuTextPointerExit(int index)
+    {
+        Debug.Log($"Cursor exited menu item: {index}");
+        ResetText(lstMenuText[index]);
+    }
+
+    public void HoverText(TMP_Text text)
+    {
+        text.GetComponent<TMP_Text>().color = Color.red;
+        text.GetComponent<TMP_Text>().fontStyle = FontStyles.Underline;
+    }
+
+    public void ResetText(TMP_Text text)
+    {
+        text.GetComponent<TMP_Text>().color = Color.white;
+        text.GetComponent<TMP_Text>().fontStyle = FontStyles.Normal;
+    }
+
 
     public void QuitGame()
     {
