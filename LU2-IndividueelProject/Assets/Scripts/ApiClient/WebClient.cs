@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Text;
 using UnityEngine;
@@ -12,6 +12,44 @@ public class WebClient : MonoBehaviour
     public void SetToken(string token)
     {
         this.token = token;
+        if (!string.IsNullOrEmpty(token))
+        {
+            PlayerPrefs.SetString("authToken", token);
+            PlayerPrefs.Save();
+            Debug.Log("✅ Token opgeslagen in PlayerPrefs: " + token);
+        }
+        else
+        {
+            PlayerPrefs.DeleteKey("authToken");
+            Debug.LogWarning("⚠️ Token is verwijderd.");
+        }
+    }
+
+    public string GetToken()
+    {
+        if (string.IsNullOrEmpty(token))
+        {
+            token = PlayerPrefs.GetString("authToken", "");
+        }
+
+        Debug.Log("🔍 Token opgehaald: " + token);
+        return token;
+    }
+
+    private void AddToken(UnityWebRequest webRequest)
+    {
+        string token = GetToken();
+
+        if (!string.IsNullOrEmpty(token))
+        {
+            string authHeader = "Bearer " + token;
+            webRequest.SetRequestHeader("Authorization", authHeader);
+            Debug.Log("🛡️ Authorization header toegevoegd: " + authHeader);
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Geen token beschikbaar voor authenticatie!");
+        }
     }
 
     public async Awaitable<IWebRequestReponse> SendGetRequest(string route)
@@ -57,6 +95,8 @@ public class WebClient : MonoBehaviour
     {
         await webRequest.SendWebRequest();
 
+        //Debug.Log("hit webclient -> sendwebrequest");
+        
         switch (webRequest.result)
         {
             case UnityWebRequest.Result.Success:
@@ -67,10 +107,10 @@ public class WebClient : MonoBehaviour
         }
     }
  
-    private void AddToken(UnityWebRequest webRequest)
-    {
-        webRequest.SetRequestHeader("Authorization", "Bearer " + token);
-    }
+    //private void AddToken(UnityWebRequest webRequest)
+    //{
+    //    webRequest.SetRequestHeader("Authorization", "Bearer " + token);
+    //}
 
     private string RemoveIdFromJson(string json)
     {

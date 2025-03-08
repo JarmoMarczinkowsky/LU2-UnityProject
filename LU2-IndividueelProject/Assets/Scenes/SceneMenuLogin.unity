@@ -785,6 +785,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &794243788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6169710881986458472, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+  m_PrefabInstance: {fileID: 4687838446056490413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1380217795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,12 +1064,41 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 89999380318012707, guid: 469175891706d2840bfdd0c25e529473, type: 3}
   m_PrefabInstance: {fileID: 4687838446056490413}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 794243788}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2123111467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794243788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 487083918}
+          m_TargetAssemblyTypeName: ScriptLoginManager, Assembly-CSharp
+          m_MethodName: CreateNewWorld
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2127403671 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8040556158315610929, guid: 6f9b88349f68f8a44b5ca21a491422d0, type: 3}
@@ -1435,7 +1469,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8749251450313938939, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       insertIndex: -1
       addedObject: {fileID: 208343904}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6169710881986458472, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2123111467}
   m_SourcePrefab: {fileID: 100100000, guid: 469175891706d2840bfdd0c25e529473, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

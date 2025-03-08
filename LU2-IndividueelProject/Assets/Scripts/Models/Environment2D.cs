@@ -14,6 +14,8 @@ public class Environment2D
 
     public string name;
 
+    public string OwnerUserId;
+
     public int maxLength;
 
     public int maxHeight;

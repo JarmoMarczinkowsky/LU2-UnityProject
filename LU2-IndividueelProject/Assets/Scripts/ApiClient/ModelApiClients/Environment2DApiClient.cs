@@ -17,10 +17,18 @@ public class Environment2DApiClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> CreateEnvironment(Environment2D environment)
     {
-        string route = "/environments";
+        string route = "/environment2d";
         string data = JsonUtility.ToJson(environment);
 
+        Debug.Log($"create environment; Creating POST request to {webClient.baseUrl}{route} with data {data}");
+
         IWebRequestReponse webRequestResponse = await webClient.SendPostRequest(route, data);
+
+        if(webRequestResponse is WebRequestError requestError)
+        {
+            Debug.Log($"Create environment error: code={requestError.ErrorCode}. Message={requestError.ErrorMessage}");
+        }
+
         return ParseEnvironment2DResponse(webRequestResponse);
     }
 
@@ -32,6 +40,7 @@ public class Environment2DApiClient : MonoBehaviour
 
     private IWebRequestReponse ParseEnvironment2DResponse(IWebRequestReponse webRequestResponse)
     {
+        Debug.Log("Here");
         switch (webRequestResponse)
         {
             case WebRequestData<string> data:

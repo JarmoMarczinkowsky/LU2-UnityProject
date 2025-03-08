@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -74,9 +75,13 @@ public class ScriptLoginManager : MonoBehaviour
             case WebRequestData<string> dataResponse:
                 Debug.Log("Login succes!");
                 // TODO: Todo handle succes scenario.
-                //SceneManager.LoadScene("SceneMenuWorld");
+
+                string token = dataResponse.Data;
+                userApiClient.webClient.SetToken(token);
                 pnlLogin.SetActive(false);
                 pnlStartGame.SetActive(true);
+
+                
                 break;
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
@@ -172,6 +177,10 @@ public class ScriptLoginManager : MonoBehaviour
         text.GetComponent<TMP_Text>().fontStyle = FontStyles.Normal;
     }
 
+    public void CreateNewWorld()
+    {
+        SceneManager.LoadScene("SceneMenuWorld");
+    }
 
     public void QuitGame()
     {
