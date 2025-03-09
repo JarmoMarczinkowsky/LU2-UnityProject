@@ -179,6 +179,13 @@ public class ScriptLoginManager : MonoBehaviour
 
     public void CreateNewWorld()
     {
+        ScriptGameState.EnvironmentState = "New";
+        SceneManager.LoadScene("SceneMenuWorld");
+    }
+
+    public void LoadNewWorld()
+    {
+        ScriptGameState.EnvironmentState = "Load";
         SceneManager.LoadScene("SceneMenuWorld");
     }
 

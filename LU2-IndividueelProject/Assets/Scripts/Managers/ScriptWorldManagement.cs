@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,9 @@ public class ScriptWorldManagement : MonoBehaviour
     public TMP_InputField FieldHeight;
     public TMP_Text txbErrorMessage;
 
+    public GameObject pnlNewWorld;
+    public GameObject pnlLoadWorld;
+
     [Header("Dependencies")]
     public UserApiClient userApiClient;
     public Environment2DApiClient environment2DApiClient;
@@ -25,6 +29,20 @@ public class ScriptWorldManagement : MonoBehaviour
     void Start()
     {
         txbErrorMessage.text = "";
+        pnlLoadWorld.SetActive(false);
+        pnlNewWorld.SetActive(false);
+
+        string getEnvironmentState = ScriptGameState.EnvironmentState;
+
+        switch (getEnvironmentState)
+        {
+            case "New":
+                pnlNewWorld.SetActive(true);
+                break;
+            case "Load":
+                pnlLoadWorld.SetActive(true);
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -67,7 +85,7 @@ public class ScriptWorldManagement : MonoBehaviour
                 Debug.Log("✅ Environment2D aangemaakt met ID: " + environment2D.id);
 
                 // Ga naar EnvironmentScene
-                SceneManager.LoadScene("EnvironmentScene");
+                //SceneManager.LoadScene("EnvironmentScene");
                 break;
 
             case WebRequestError errorResponse:

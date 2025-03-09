@@ -1241,14 +1241,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       propertyPath: m_Delegates.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       propertyPath: m_Delegates.Array.data[1].eventID
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].eventID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
@@ -1260,6 +1268,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 487083918}
@@ -1268,7 +1280,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 487083918}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 487083918}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
@@ -1276,7 +1296,15 @@ PrefabInstance:
       value: MenuTextPointerExit
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNewWorld
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScriptLoginManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: ScriptLoginManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
@@ -1288,11 +1316,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: LoadWorld
       objectReference: {fileID: 0}
     - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: LoadWorld
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194311716375700809, guid: 469175891706d2840bfdd0c25e529473, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4669394327859135920, guid: 469175891706d2840bfdd0c25e529473, type: 3}
