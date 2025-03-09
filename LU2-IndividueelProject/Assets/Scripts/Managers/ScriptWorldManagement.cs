@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScriptWorldManagement : MonoBehaviour
 {
@@ -23,7 +25,7 @@ public class ScriptWorldManagement : MonoBehaviour
     public Environment2DApiClient environment2DApiClient;
     public Object2DApiClient object2DApiClient;
 
-    private Environment2D environment2D;
+    public static Environment2D environment2D;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,14 +43,35 @@ public class ScriptWorldManagement : MonoBehaviour
                 break;
             case "Load":
                 pnlLoadWorld.SetActive(true);
+                LoadWorldsAssociatedByUser();
                 break;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private async void LoadWorldsAssociatedByUser()
     {
-        
+        IWebRequestReponse webRequestResponse = await environment2DApiClient.ReadEnvironment2Ds();
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<List<Environment2D>> dataResponse:
+                List<Environment2D> environment2Ds = dataResponse.Data;
+                Debug.Log("List of environment2Ds: ");
+                //environment2Ds.ForEach(environment2D => Debug.Log(environment2D.id));
+                environment2Ds.ForEach(environment2D => Debug.Log(environment2D.name));
+
+                // TODO: Handle succes scenario.
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Read environment2Ds error: " + errorMessage);
+                // TODO: Handle error scenario. Show the errormessage to the user.
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
     }
 
     public void CreateWorld()
@@ -73,7 +96,6 @@ public class ScriptWorldManagement : MonoBehaviour
         CreateEnvironment2D();
     }
 
-    [ContextMenu("Environment2D/Create")]
     public async void CreateEnvironment2D()
     {
         IWebRequestReponse webRequestResponse = await environment2DApiClient.CreateEnvironment(environment2D);
@@ -82,7 +104,7 @@ public class ScriptWorldManagement : MonoBehaviour
         {
             case WebRequestData<Environment2D> dataResponse:
                 environment2D = dataResponse.Data; // Update het lokale object
-                Debug.Log("✅ Environment2D aangemaakt met ID: " + environment2D.id);
+                Debug.Log($"Wereld '{environment2D.name}' aangemaakt met ID: {environment2D.id}");
 
                 // Ga naar EnvironmentScene
                 //SceneManager.LoadScene("EnvironmentScene");

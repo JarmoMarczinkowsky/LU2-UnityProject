@@ -9,7 +9,7 @@ public class Environment2DApiClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> ReadEnvironment2Ds() 
     {
-        string route = "/environments";
+        string route = "/environment2d";
 
         IWebRequestReponse webRequestResponse = await webClient.SendGetRequest(route);
         return ParseEnvironment2DListResponse(webRequestResponse);
