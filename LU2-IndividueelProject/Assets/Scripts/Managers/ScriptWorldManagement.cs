@@ -16,6 +16,7 @@ public class ScriptWorldManagement : MonoBehaviour
     public TMP_InputField FieldLength;
     public TMP_InputField FieldHeight;
     public TMP_Text txbErrorMessage;
+    public List<Button> lstLoadGameButtons;
 
     public GameObject pnlNewWorld;
     public GameObject pnlLoadWorld;
@@ -60,6 +61,7 @@ public class ScriptWorldManagement : MonoBehaviour
                 //environment2Ds.ForEach(environment2D => Debug.Log(environment2D.id));
                 environment2Ds.ForEach(environment2D => Debug.Log(environment2D.name));
 
+                PlaceLevelsInButtons(environment2Ds);
                 // TODO: Handle succes scenario.
                 break;
             case WebRequestError errorResponse:
@@ -72,6 +74,16 @@ public class ScriptWorldManagement : MonoBehaviour
         }
     }
 
+    private void PlaceLevelsInButtons(List<Environment2D> environmentsByUser)
+    {
+        Debug.Log($"Amount of worlds found: {environmentsByUser.Count}");
+
+        for (int i = 0; i < environmentsByUser.Count; i++)
+        {
+            Debug.Log($"Loop {i}= {environmentsByUser[i].name}");
+            lstLoadGameButtons[i].gameObject.SetActive(true);
+            lstLoadGameButtons[i].GetComponentInChildren<TMP_Text>().text = environmentsByUser[i].name;
+        }
     }
 
     public void CreateWorld()
