@@ -16,6 +16,7 @@ public class ScriptWorldManagement : MonoBehaviour
     public TMP_InputField FieldLength;
     public TMP_InputField FieldHeight;
     public TMP_Text txbErrorMessage;
+    public TMP_Text txbLoadLevelError;
     public List<Button> lstLoadGameButtons;
 
     public GameObject pnlNewWorld;
@@ -27,6 +28,8 @@ public class ScriptWorldManagement : MonoBehaviour
     public Object2DApiClient object2DApiClient;
 
     public static Environment2D environment2D;
+
+    private List<Environment2D> userEnvironments;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,12 +59,12 @@ public class ScriptWorldManagement : MonoBehaviour
         switch (webRequestResponse)
         {
             case WebRequestData<List<Environment2D>> dataResponse:
-                List<Environment2D> environment2Ds = dataResponse.Data;
+                userEnvironments = dataResponse.Data;
                 Debug.Log("List of environment2Ds: ");
                 //environment2Ds.ForEach(environment2D => Debug.Log(environment2D.id));
-                environment2Ds.ForEach(environment2D => Debug.Log(environment2D.name));
+                userEnvironments.ForEach(environment2D => Debug.Log(environment2D.name));
 
-                PlaceLevelsInButtons(environment2Ds);
+                PlaceLevelsInButtons();
                 // TODO: Handle succes scenario.
                 break;
             case WebRequestError errorResponse:
@@ -74,15 +77,33 @@ public class ScriptWorldManagement : MonoBehaviour
         }
     }
 
-    private void PlaceLevelsInButtons(List<Environment2D> environmentsByUser)
+    private void PlaceLevelsInButtons()
     {
-        Debug.Log($"Amount of worlds found: {environmentsByUser.Count}");
+        int maxLoopValue;
 
-        for (int i = 0; i < environmentsByUser.Count; i++)
+        Debug.Log($"Amount of worlds found: {userEnvironments.Count}");
+
+        if(userEnvironments.Count > 5)
         {
-            Debug.Log($"Loop {i}= {environmentsByUser[i].name}");
+            maxLoopValue = 5;
+        }
+        else
+        {
+            maxLoopValue = userEnvironments.Count;
+        }
+
+        for (int i = 0; i < maxLoopValue; i++)
+        {
+            Debug.Log($"Loop {i}= {userEnvironments[i].name}");
+
+            if (lstLoadGameButtons[i].GetComponentInChildren<TMP_Text>() == null || userEnvironments[i].name == null)
+            {
+                Debug.Log($"Found no text to change at {i}");
+                continue;
+            }
+
             lstLoadGameButtons[i].gameObject.SetActive(true);
-            lstLoadGameButtons[i].GetComponentInChildren<TMP_Text>().text = environmentsByUser[i].name;
+            lstLoadGameButtons[i].GetComponentInChildren<TMP_Text>().text = userEnvironments[i].name;
         }
     }
 
@@ -124,7 +145,7 @@ public class ScriptWorldManagement : MonoBehaviour
 
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
-                Debug.LogError("❌ Fout bij het maken van environment2D: " + errorMessage);
+                Debug.LogError($"Er is een fout opgetreden bij het aanmaken van een wereld: {errorMessage}");
                 break;
 
             default:
