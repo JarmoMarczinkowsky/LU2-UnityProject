@@ -152,4 +152,16 @@ public class ScriptWorldManagement : MonoBehaviour
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
         }
     }
+
+    public void LoadLevelOnClick(int buttonValue)
+    {
+        if(buttonValue > userEnvironments.Count - 1)
+        {
+            txbLoadLevelError.text = "I dont know how you did this, but it should not be possible";
+            return;
+        }
+
+        Debug.Log($"Clicked on button {buttonValue} that has name {userEnvironments[buttonValue].name}");
+
+    }
 }
