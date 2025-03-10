@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WesternWallpaper_0: -6912886036112437759
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

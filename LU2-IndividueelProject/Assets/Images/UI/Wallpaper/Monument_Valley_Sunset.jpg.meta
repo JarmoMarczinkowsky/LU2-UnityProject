@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Monument_Valley_Sunset_0: 5572259701482478696
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

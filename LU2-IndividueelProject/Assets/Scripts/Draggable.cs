@@ -6,19 +6,14 @@ using UnityEngine;
 */
 public class Draggable: MonoBehaviour
 {
-    public Transform trans;
- 
-    private bool isDragging = false;
+    public ObjectManager objectManager;
 
-    public void StartDragging()
-    {
-        isDragging = true;
-    }
+    public bool isDragging = false;
 
     public void Update()
     {
         if (isDragging)
-            trans.position = GetMousePosition();
+            this.transform.position = GetMousePosition();
     }
 
     private void OnMouseUpAsButton()
@@ -27,7 +22,7 @@ public class Draggable: MonoBehaviour
 
         if (!isDragging)
         {
-            // Stopped dragging. Add any logic here that you need for this scenario.
+            objectManager.ShowMenu();
         }
     }
 
@@ -37,5 +32,4 @@ public class Draggable: MonoBehaviour
         positionInWorld.z = 0;
         return positionInWorld;
     }
-
 }
