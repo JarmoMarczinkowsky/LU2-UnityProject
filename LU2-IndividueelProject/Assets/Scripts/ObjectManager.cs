@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public class ObjectManager : MonoBehaviour
 {
@@ -12,6 +15,74 @@ public class ObjectManager : MonoBehaviour
 
     // Lijst met objecten die geplaatst zijn in de wereld
     private List<GameObject> placedObjects;
+    private GameObject obj;
+    private int lastCreatedObject;
+
+    [Header("Dependencies")]
+    public UserApiClient userApiClient;
+    public Environment2DApiClient environment2DApiClient;
+    public Object2DApiClient object2DApiClient;
+
+    private void Start()
+    {
+        ReadObjectsByLevel();
+    }
+
+    private async void ReadObjectsByLevel()
+    {
+        IWebRequestReponse webRequestResponse = await object2DApiClient.ReadObject2Ds(ScriptGameState.chosenEnvironment.id);
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<List<Object2D>> dataResponse:
+                List<Object2D> object2Ds = dataResponse.Data;
+                Debug.Log("List of object2Ds: " + object2Ds);
+                object2Ds.ForEach(object2D => Debug.Log(object2D.id));
+                
+                // TODO: Succes scenario. Show the enviroments in the environment
+                PlaceObjectsInLevel(object2Ds);
+
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Read object2Ds error: " + errorMessage);
+                // TODO: Error scenario. Show the errormessage to the user.
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
+    private void PlaceObjectsInLevel(List<Object2D> WorldObjects)
+    {
+        foreach (var item in WorldObjects)
+        {
+            Debug.Log($"Item {item.prefabId} wordt geplaatst");
+
+            int prefabId = Convert.ToInt32(item.prefabId);
+
+
+            if (prefabId >= 0 && prefabId <= 4)
+            {
+                obj = Instantiate(prefabObjects[prefabId]);
+            }
+            else
+            {
+                obj = null;
+            }
+
+            if (obj != null)
+            {
+                placeSingleObject(obj, item);
+            }
+        }
+    }
+
+    private void placeSingleObject(GameObject newlyPlacedObject, Object2D item)
+    {
+        newlyPlacedObject.transform.localPosition = new Vector2(item.positionX, item.positionY);
+        newlyPlacedObject.transform.Rotate(0, 0, item.rotationZ);
+    }
 
     // Methode om een nieuw 2D object te plaatsen
     public void PlaceNewObject2D(int index)
