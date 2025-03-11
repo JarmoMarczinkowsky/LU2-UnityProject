@@ -5146,7 +5146,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1909224181}
         m_TargetAssemblyTypeName: ScriptWorldManagement, Assembly-CSharp
-        m_MethodName: CreateWorld
+        m_MethodName: DeleteLevelOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

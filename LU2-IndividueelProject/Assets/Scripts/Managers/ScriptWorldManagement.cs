@@ -195,5 +195,45 @@ public class ScriptWorldManagement : MonoBehaviour
         }
     }
 
+    public void DeleteLevelOnClick()
+    {
+        DeleteEnvironment2D();
+    }
+
+    private async void DeleteEnvironment2D()
+    {
+        IWebRequestReponse webRequestResponse = await environment2DApiClient.DeleteEnvironment(ScriptGameState.chosenEnvironment.id);
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<string> dataResponse:
+                string responseData = dataResponse.Data;
+                // TODO: Handle succes scenario.
+                
+                foreach (var buttons in lstLoadGameButtons)
+                {
+                    if (buttons.GetComponentInChildren<TMP_Text>().text == ScriptGameState.chosenEnvironment.name)
+                    {
+                        buttons.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+
+                userEnvironments.RemoveAll(env => env.id == ScriptGameState.chosenEnvironment.id);
+                ScriptGameState.chosenEnvironment = null;
+                Debug.Log("De wereld is succesvol verwijderd");
+
+
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Delete environment error: " + errorMessage);
+                // TODO: Handle error scenario. Show the errormessage to the user.
+                txbLoadLevelError.text = "Kon wereld niet verwijderen";
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
 
 }

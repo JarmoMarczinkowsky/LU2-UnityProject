@@ -34,7 +34,7 @@ public class Environment2DApiClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> DeleteEnvironment(string environmentId)
     {
-        string route = "/environments/" + environmentId;
+        string route = "/environment2d/" + environmentId;
         return await webClient.SendDeleteRequest(route);
     }
 
