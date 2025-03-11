@@ -93,6 +93,7 @@ public class ObjectManager : MonoBehaviour
         // Instantieer het prefab object op de positie (0,0,0) zonder rotatie
         Debug.Log($"Going to instantiate prefab {index}");
         GameObject instanceOfPrefab = Instantiate(prefabObjects[index], Vector3.zero, Quaternion.identity);
+        lastCreatedObject = index;
         Debug.Log($"Instantiated prefab {index}");
 
         // Haal het Object2D component op van het nieuw geplaatste object
@@ -103,6 +104,45 @@ public class ObjectManager : MonoBehaviour
         
         // Zet de isDragging eigenschap van het object op true zodat het gesleept kan worden
         draggableObject.isDragging = true;
+    }
+
+    public void PrepareObjectForDatabase(Transform objectLocation)
+    {
+        Object2D objectInformation = new Object2D()
+        {
+            id = Convert.ToString(Guid.NewGuid()),
+            prefabId = Convert.ToString(lastCreatedObject),
+            environmentId = ScriptGameState.chosenEnvironment.id,
+            positionX = (float)Math.Round(objectLocation.localPosition.x, 4),
+            positionY = (float)Math.Round(objectLocation.localPosition.y, 4),
+            rotationZ = (float)Math.Round(objectLocation.localPosition.z, 4),
+            scaleX = (float)Math.Round(objectLocation.localScale.x, 4),
+            scaleY = (float)Math.Round(objectLocation.localScale.y, 4),
+            sortingLayer = 0
+        };
+
+        SaveObjectToDatabase(objectInformation);
+    }
+
+    private async void SaveObjectToDatabase(Object2D saveThisObject)
+    {
+        IWebRequestReponse webRequestResponse = await object2DApiClient.CreateObject2D(saveThisObject);
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<Object2D> dataResponse:
+                saveThisObject.id = dataResponse.Data.id;
+                // TODO: Handle succes scenario.
+                Debug.Log("Succesfully saved object");
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Create Object2D error: " + errorMessage);
+                // TODO: Handle error scenario. Show the errormessage to the user.
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
     }
 
     // Methode om het menu te tonen

@@ -23,7 +23,14 @@ public class Draggable: MonoBehaviour
         if (!isDragging)
         {
             objectManager.ShowMenu();
+
+            SaveObjectToDatabase();
         }
+    }
+
+    private void SaveObjectToDatabase()
+    {
+        objectManager.PrepareObjectForDatabase(this.transform);
     }
 
     private Vector3 GetMousePosition()
