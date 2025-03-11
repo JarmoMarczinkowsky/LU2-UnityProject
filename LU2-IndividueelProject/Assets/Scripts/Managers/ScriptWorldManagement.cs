@@ -155,7 +155,7 @@ public class ScriptWorldManagement : MonoBehaviour
         }
     }
 
-    public void LoadLevelOnClick(int buttonValue)
+    public void SetWorldToLoad(int buttonValue)
     {
         if(buttonValue > userEnvironments.Count - 1)
         {
@@ -165,12 +165,34 @@ public class ScriptWorldManagement : MonoBehaviour
 
         //Debug.Log($"Value of button = {buttonValue}");
         string textInButton = lstLoadGameButtons[buttonValue].GetComponentInChildren<TMP_Text>().text;
-        Environment2D chosenEnvironment = (Environment2D)(userEnvironments.Where(environment => environment.name.ToLower() == textInButton.ToLower()));
+
+        var chosenEnvironment = userEnvironments.FirstOrDefault(env=> env.name.ToLower() == textInButton.ToLower());
         Debug.Log($"Clicked on button {buttonValue} that has name {chosenEnvironment.name}");
+
+        for (int i = 0; i < lstLoadGameButtons.Count; i++)
+        {
+            if (i ==  buttonValue)
+            {
+                lstLoadGameButtons[i].GetComponentInChildren<TMP_Text>().color = Color.green;
+            }
+            else
+            {
+                lstLoadGameButtons[i].GetComponentInChildren<TMP_Text>().color = Color.black;
+            }
+        }
 
         ScriptGameState.chosenEnvironment = chosenEnvironment;
         //SceneManager.LoadScene("SceneBuilder");
+    }
 
+    public void LoadLevelOnClick()
+    {
+        if (ScriptGameState.chosenEnvironment != null)
+        {
+            Debug.Log($"Going to load level {ScriptGameState.chosenEnvironment.name}");
+            SceneManager.LoadScene("SceneBuilder");
+            Debug.Log($"Loaded level {ScriptGameState.chosenEnvironment.name}");
+        }
     }
 
 

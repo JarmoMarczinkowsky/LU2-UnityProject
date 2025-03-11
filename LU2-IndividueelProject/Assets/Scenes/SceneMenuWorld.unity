@@ -315,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &114045409
 RectTransform:
   m_ObjectHideFlags: 0
@@ -382,7 +382,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1909224181}
         m_TargetAssemblyTypeName: ScriptWorldManagement, Assembly-CSharp
-        m_MethodName: LoadLevelOnClick
+        m_MethodName: SetWorldToLoad
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -584,7 +584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &143574364
 RectTransform:
   m_ObjectHideFlags: 0
@@ -651,7 +651,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1909224181}
         m_TargetAssemblyTypeName: ScriptWorldManagement, Assembly-CSharp
-        m_MethodName: LoadLevelOnClick
+        m_MethodName: SetWorldToLoad
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1072,7 +1072,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1909224181}
         m_TargetAssemblyTypeName: ScriptWorldManagement, Assembly-CSharp
-        m_MethodName: CreateWorld
+        m_MethodName: LoadLevelOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1792,7 +1792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &498015795
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1859,7 +1859,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1909224181}
         m_TargetAssemblyTypeName: ScriptWorldManagement, Assembly-CSharp
-        m_MethodName: LoadLevelOnClick
+        m_MethodName: SetWorldToLoad
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2845,7 +2845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &978624290
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2912,7 +2912,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1909224181}
         m_TargetAssemblyTypeName: ScriptWorldManagement, Assembly-CSharp
-        m_MethodName: LoadLevelOnClick
+        m_MethodName: SetWorldToLoad
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2978,7 +2978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &979079678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3045,7 +3045,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1909224181}
         m_TargetAssemblyTypeName: ScriptWorldManagement, Assembly-CSharp
-        m_MethodName: LoadLevelOnClick
+        m_MethodName: SetWorldToLoad
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
