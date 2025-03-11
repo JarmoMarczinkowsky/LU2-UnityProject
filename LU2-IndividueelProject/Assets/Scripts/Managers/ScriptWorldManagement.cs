@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security;
 using TMPro;
 using UnityEngine;
@@ -71,6 +72,7 @@ public class ScriptWorldManagement : MonoBehaviour
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.Log("Read environment2Ds error: " + errorMessage);
                 // TODO: Handle error scenario. Show the errormessage to the user.
+                txbLoadLevelError.text = "Er is een error opgetreden tijdens het laden van levels";
                 break;
             default:
                 throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
@@ -161,7 +163,13 @@ public class ScriptWorldManagement : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Clicked on button {buttonValue} that has name {userEnvironments[buttonValue].name}");
+        //Debug.Log($"Value of button = {buttonValue}");
+        string textInButton = lstLoadGameButtons[buttonValue].GetComponentInChildren<TMP_Text>().text;
+        Environment2D chosenEnvironment = (Environment2D)(userEnvironments.Where(environment => environment.name.ToLower() == textInButton.ToLower()));
+        Debug.Log($"Clicked on button {buttonValue} that has name {chosenEnvironment.name}");
+
+        ScriptGameState.chosenEnvironment = chosenEnvironment;
+        //SceneManager.LoadScene("SceneBuilder");
 
     }
 
