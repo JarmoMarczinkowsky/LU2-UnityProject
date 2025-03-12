@@ -143,6 +143,8 @@ public class ScriptWorldManagement : MonoBehaviour
 
                 // Ga naar EnvironmentScene
                 //SceneManager.LoadScene("EnvironmentScene");
+                ScriptGameState.chosenEnvironment = environment2D;
+                SceneManager.LoadScene("SceneBuilder");
                 break;
 
             case WebRequestError errorResponse:
