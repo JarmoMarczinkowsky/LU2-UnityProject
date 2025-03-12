@@ -151,10 +151,8 @@ public class ObjectManager : MonoBehaviour
         UISideMenu.SetActive(true);
     }
 
-    // Methode om de huidige scène te resetten
-    //public void Reset()
-    //{
-    //    // Laad de huidige scène opnieuw
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    //}
+    public void BackToLogin()
+    {
+        SceneManager.LoadScene("SceneMenuLogin");
+    }
 }

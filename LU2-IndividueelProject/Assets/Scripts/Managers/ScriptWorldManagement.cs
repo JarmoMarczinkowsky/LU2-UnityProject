@@ -245,4 +245,9 @@ public class ScriptWorldManagement : MonoBehaviour
         }
     }
 
+    public void BackToLogin()
+    {
+        SceneManager.LoadScene("SceneMenuLogin");
+    }
+
 }
