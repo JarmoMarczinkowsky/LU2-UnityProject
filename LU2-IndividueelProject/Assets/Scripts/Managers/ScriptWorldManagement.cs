@@ -117,6 +117,12 @@ public class ScriptWorldManagement : MonoBehaviour
             return;
         }
 
+        if(FieldName.text.Trim().Length < 1 || FieldName.text.Trim().Length > 25)
+        {
+            txbErrorMessage.text = "Naam moet tussen de 1 en 25 karakters zijn";
+            return;
+        }
+
         string environmentName = FieldName.text.Trim();
 
         // Maak een nieuwe Environment2D instantie
