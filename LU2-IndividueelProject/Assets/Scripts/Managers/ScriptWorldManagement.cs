@@ -156,6 +156,7 @@ public class ScriptWorldManagement : MonoBehaviour
             case WebRequestError errorResponse:
                 string errorMessage = errorResponse.ErrorMessage;
                 Debug.LogError($"Er is een fout opgetreden bij het aanmaken van een wereld: {errorMessage}");
+                txbErrorMessage.text = "Er is een fout opgetreden bij \nhet aanmaken van een wereld";
                 break;
 
             default:

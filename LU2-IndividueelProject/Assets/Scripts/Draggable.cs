@@ -22,9 +22,12 @@ public class Draggable: MonoBehaviour
 
         if (!isDragging)
         {
-            objectManager.ShowMenu();
+            if (objectManager != null)
+            {
+                objectManager.ShowMenu();
 
-            SaveObjectToDatabase();
+                SaveObjectToDatabase();
+            }
         }
     }
 
