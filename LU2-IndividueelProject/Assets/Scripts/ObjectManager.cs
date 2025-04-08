@@ -82,6 +82,9 @@ public class ObjectManager : MonoBehaviour
     {
         newlyPlacedObject.transform.localPosition = new Vector2(item.positionX, item.positionY);
         newlyPlacedObject.transform.Rotate(0, 0, item.rotationZ);
+
+        Draggable draggableObject = newlyPlacedObject.GetComponent<Draggable>();
+        draggableObject.objectId = item.id;
     }
 
     // Methode om een nieuw 2D object te plaatsen
@@ -97,7 +100,7 @@ public class ObjectManager : MonoBehaviour
         Debug.Log($"Instantiated prefab {index}");
 
         // Haal het Object2D component op van het nieuw geplaatste object
-        Draggable draggableObject = instanceOfPrefab.GetComponent<Draggable>();
+        Draggable draggableObject = instanceOfPrefab.GetComponent<Draggable>(); 
         
         // Stel de objectManager van het object in op deze instantie van ObjectManager
         draggableObject.objectManager = this;
