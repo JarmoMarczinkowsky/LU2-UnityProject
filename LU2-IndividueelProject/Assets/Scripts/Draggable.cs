@@ -82,7 +82,7 @@ public class Draggable: MonoBehaviour
                     scaleY = (float)Math.Round(this.transform.localScale.y, 4)
                 };
 
-                
+                //UpdateDatabase
             }
         }
     }
