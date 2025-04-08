@@ -111,17 +111,18 @@ public class ScriptWorldManagement : MonoBehaviour
 
     public void CreateWorld()
     {
-        if (string.IsNullOrWhiteSpace(FieldName.text))
+        if (!ValidateNameField())
         {
-            txbErrorMessage.text = "Voer een naam in";
             return;
         }
 
-        if(FieldName.text.Trim().Length < 1 || FieldName.text.Trim().Length > 25)
+        if(!ValidateLengthAndHeight())
         {
-            txbErrorMessage.text = "Naam moet tussen de 1 en 25 karakters zijn";
             return;
         }
+
+        int length = int.Parse(FieldLength.text.Trim());
+        int height = int.Parse(FieldHeight.text.Trim());
 
         string environmentName = FieldName.text.Trim();
 
@@ -129,12 +130,60 @@ public class ScriptWorldManagement : MonoBehaviour
         environment2D = new Environment2D
         {
             name = environmentName,
-            maxLength = 123,
-            maxHeight = 456
+            maxLength = length,
+            maxHeight = height
         };
 
         // Roep de CreateEnvironment2D methode aan
         CreateEnvironment2D();
+    }
+
+    private bool ValidateNameField()
+    {
+        if (string.IsNullOrWhiteSpace(FieldName.text))
+        {
+            txbErrorMessage.text = "Voer een naam in";
+            return false;
+        }
+
+        if (FieldName.text.Trim().Length < 1 || FieldName.text.Trim().Length > 25)
+        {
+            txbErrorMessage.text = "Naam moet tussen de 1 en 25 karakters zijn";
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateLengthAndHeight()
+    {
+        if (string.IsNullOrWhiteSpace(FieldLength.text) || string.IsNullOrWhiteSpace(FieldHeight.text))
+        {
+            txbErrorMessage.text = "Voer een lengte en hoogte in";
+            return false;
+        }
+
+        if (!int.TryParse(FieldLength.text, out int length) || !int.TryParse(FieldHeight.text, out int height))
+        {
+            txbErrorMessage.text = "Voer een geldige lengte en hoogte in";
+            return false;
+        }
+
+        if (length < 20 || length > 200)
+        {
+            txbErrorMessage.text = "Lengte moet tussen de 20 en 200 zijn";
+            return false;
+
+        }
+
+        if (height < 10 || height > 100)
+        {
+            txbErrorMessage.text = "Hoogte moet tussen de 10 en 100 zijn";
+            return false;
+
+        }
+
+        return true;
     }
 
     public async void CreateEnvironment2D()
