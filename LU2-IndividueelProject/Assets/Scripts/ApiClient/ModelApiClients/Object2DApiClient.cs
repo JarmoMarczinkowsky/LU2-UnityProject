@@ -27,11 +27,20 @@ public class Object2DApiClient : MonoBehaviour
 
     public async Awaitable<IWebRequestReponse> UpdateObject2D(Object2D object2D)
     {
-        string route = "/environments/" + object2D.environmentId + "/objects/" + object2D.id;
+        string route = $"/object2d/{object2D.id}";
         string data = JsonUtility.ToJson(object2D);
+        Debug.Log($"My data = {data}");
 
         return await webClient.SendPutRequest(route, data);
     }
+
+    //public async Awaitable<IWebRequestReponse> UpdateObject2D(Object2D object2D)
+    //{
+    //    string route = "/environments/" + object2D.environmentId + "/objects/" + object2D.id;
+    //    string data = JsonUtility.ToJson(object2D);
+
+    //    return await webClient.SendPutRequest(route, data);
+    //}
 
     private IWebRequestReponse ParseObject2DResponse(IWebRequestReponse webRequestResponse)
     {

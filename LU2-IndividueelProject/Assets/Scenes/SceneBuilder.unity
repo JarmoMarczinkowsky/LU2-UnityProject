@@ -282,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 510045291}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: -0.7, z: 90.74057}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 15.765334, y: 10.17462, z: 0.7799179}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -394,6 +394,7 @@ MonoBehaviour:
   - {fileID: 4947877906304565778, guid: 2bdf5529c4ec1e943b4252032f3c4b07, type: 3}
   - {fileID: 8370818757291405137, guid: 283a49436bb8a7f46a157d26a4e9e201, type: 3}
   - {fileID: 4440043348580511687, guid: 4e9f63014cc2bfb46b1becc7e546ad3d, type: 3}
+  backgroundPrefab: {fileID: 510045291}
   userApiClient: {fileID: 1046559480}
   environment2DApiClient: {fileID: 1046559482}
   object2DApiClient: {fileID: 1046559481}

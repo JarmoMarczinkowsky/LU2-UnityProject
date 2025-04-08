@@ -13,6 +13,8 @@ public class ObjectManager : MonoBehaviour
     // Lijst met objecten die geplaatst kunnen worden die overeenkomen met de prefabs in de prefabs map
     public List<GameObject> prefabObjects;
 
+    public GameObject backgroundPrefab;
+
     // Lijst met objecten die geplaatst zijn in de wereld
     private List<GameObject> placedObjects;
     private GameObject obj;
@@ -25,7 +27,17 @@ public class ObjectManager : MonoBehaviour
 
     private void Start()
     {
+        SetBackgroundSize();
+
         ReadObjectsByLevel();
+    }
+
+    private void SetBackgroundSize()
+    {
+        int length = ScriptGameState.chosenEnvironment.maxLength;
+        int height = ScriptGameState.chosenEnvironment.maxHeight;
+        //backgroundPrefab.GetComponent<SpriteRenderer>().bounds.size.x = length;
+        Debug.Log($"World x: {backgroundPrefab.GetComponent<SpriteRenderer>().bounds.size.x}, y: {backgroundPrefab.GetComponent<SpriteRenderer>().bounds.size.y}");
     }
 
     private async void ReadObjectsByLevel()
@@ -148,6 +160,33 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
+    public void UpdateObject(Object2D objectToUpdate)
+    {
+        UpdateObjectInDatabase(objectToUpdate);
+    }
+
+    private async void UpdateObjectInDatabase(Object2D updateThisObject)
+    {
+        IWebRequestReponse webRequestResponse = await object2DApiClient.UpdateObject2D(updateThisObject);
+
+        switch (webRequestResponse)
+        {
+            case WebRequestData<Object2D> dataResponse:
+                // TODO: Handle succes scenario.
+                Debug.Log("Succesfully saved object");
+                break;
+            case WebRequestError errorResponse:
+                string errorMessage = errorResponse.ErrorMessage;
+                Debug.Log("Create Object2D error: " + errorMessage);
+                // TODO: Handle error scenario. Show the errormessage to the user.
+                break;
+            default:
+                throw new NotImplementedException("No implementation for webRequestResponse of class: " + webRequestResponse.GetType());
+        }
+    }
+
+
+
     // Methode om het menu te tonen
     public void ShowMenu()
     {
@@ -157,5 +196,12 @@ public class ObjectManager : MonoBehaviour
     public void BackToLogin()
     {
         SceneManager.LoadScene("SceneMenuLogin");
+    }
+
+    private Vector3 GetMousePosition()
+    {
+        Vector3 positionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        positionInWorld.z = 0;
+        return positionInWorld;
     }
 }
