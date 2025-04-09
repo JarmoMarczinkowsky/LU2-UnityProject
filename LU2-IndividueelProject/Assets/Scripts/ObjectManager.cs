@@ -15,6 +15,8 @@ public class ObjectManager : MonoBehaviour
 
     public GameObject backgroundPrefab;
 
+    private string guidId;
+
     // Lijst met objecten die geplaatst zijn in de wereld
     private List<GameObject> placedObjects;
     private GameObject obj;
@@ -97,6 +99,7 @@ public class ObjectManager : MonoBehaviour
 
         Draggable draggableObject = newlyPlacedObject.GetComponent<Draggable>();
         draggableObject.objectId = item.id;
+        draggableObject.prefabId = item.prefabId;
     }
 
     // Methode om een nieuw 2D object te plaatsen
@@ -112,11 +115,15 @@ public class ObjectManager : MonoBehaviour
         Debug.Log($"Instantiated prefab {index}");
 
         // Haal het Object2D component op van het nieuw geplaatste object
-        Draggable draggableObject = instanceOfPrefab.GetComponent<Draggable>(); 
-        
+        Draggable draggableObject = instanceOfPrefab.GetComponent<Draggable>();
+        guidId = Convert.ToString(Guid.NewGuid());
+
+
         // Stel de objectManager van het object in op deze instantie van ObjectManager
         draggableObject.objectManager = this;
-        
+        draggableObject.objectId = guidId; 
+        draggableObject.prefabId = Convert.ToString(index);
+
         // Zet de isDragging eigenschap van het object op true zodat het gesleept kan worden
         draggableObject.isDragging = true;
     }
@@ -125,7 +132,7 @@ public class ObjectManager : MonoBehaviour
     {
         Object2D objectInformation = new Object2D()
         {
-            id = Convert.ToString(Guid.NewGuid()),
+            id = guidId,
             prefabId = Convert.ToString(lastCreatedObject),
             environmentId = ScriptGameState.chosenEnvironment.id,
             positionX = (float)Math.Round(objectLocation.localPosition.x, 4),
